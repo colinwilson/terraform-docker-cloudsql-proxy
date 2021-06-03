@@ -1,0 +1,2 @@
+# terraform-docker-cloudsql-proxy
+A Terraform module to provision a [Google Cloud SQL Proxy](https://github.com/GoogleCloudPlatform/cloudsql-proxy) container on a Docker Swarm host. See the variables file for the available configuration options.
