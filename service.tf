@@ -1,6 +1,6 @@
 # Create Cloud SQL Proxy Docker service
-resource "docker_service" "cloud-sql-proxy" {
-  name = "cloud-sql-proxy"
+resource "docker_service" "cloudsql_proxy" {
+  name = "cloudsql-proxy"
 
   task_spec {
     container_spec {
