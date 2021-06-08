@@ -22,6 +22,12 @@ variable "private_network" {
   default     = "private"
 }
 
+variable "image_name" {
+  type        = string
+  description = "Cloud SQL Proxy Docker image."
+  default     = "eu.gcr.io/cloudsql-docker/gce-proxy"
+}
+
 variable "image_version" {
   type        = string
   description = "Cloud SQL Proxy Docker image version."

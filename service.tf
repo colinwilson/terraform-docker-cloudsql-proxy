@@ -4,7 +4,8 @@ resource "docker_service" "cloudsql_proxy" {
 
   task_spec {
     container_spec {
-      image = "eu.gcr.io/cloudsql-docker/gce-proxy:${var.image_version}"
+      image = docker_image.cloudsql_proxy.latest
+
       command = [
         "/cloud_sql_proxy",
         "-instances=${var.instance_connection_name}=tcp:0.0.0.0:5432",
