@@ -31,5 +31,5 @@ variable "image_name" {
 variable "image_version" {
   type        = string
   description = "Cloud SQL Proxy Docker image version."
-  default     = "1.23.0"
+  default     = "1.23.1"
 }
