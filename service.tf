@@ -1,15 +1,17 @@
 # Create Cloud SQL Proxy Docker service
-resource "docker_service" "cloudsql_proxy" {
-  name = "cloudsql-proxy"
+resource "docker_service" "cloud_sql_proxy" {
+  name = "cloud-sql-proxy"
 
   task_spec {
     container_spec {
-      image = docker_image.cloudsql_proxy.latest
+      image = docker_image.cloud_sql_proxy.repo_digest
 
       command = [
-        "/cloud_sql_proxy",
-        "-instances=${var.instance_connection_name}=tcp:0.0.0.0:5432",
-        "-credential_file=/secrets/service_account.json"
+        "/cloud-sql-proxy",
+        "--address=${var.listen_address}",
+        "--port=${var.listen_port}",
+        "--credentials-file=/secrets/service_account.json",
+        "${var.instance_connection_name}"
       ]
 
       secrets {
@@ -19,7 +21,16 @@ resource "docker_service" "cloudsql_proxy" {
       }
 
     }
-    networks = var.networks
+    networks_advanced {
+      name = docker_network.cloud_sql_proxy.name
+    }
+
+    dynamic "networks_advanced" {
+      for_each = var.additional_networks
+      content {
+        name = each.key
+      }
+    }
   }
 
   endpoint_spec {

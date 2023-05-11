@@ -10,26 +10,38 @@ variable "service_account_key_base64" {
 }
 
 # Optional variables
-variable "networks" {
+variable "additional_networks" {
   type        = list(any)
-  description = "List of networks to connect Cloud SQL Proxy to."
-  default     = ["private"]
+  description = "Names of additional networks to connect Cloud SQL Proxy to."
+  default     = []
 }
 
-variable "private_network" {
+variable "cloud_sql_proxy_network" {
   type        = string
-  description = "Private (Docker overlay) network name."
-  default     = "private"
+  description = "Cloud SQL Proxy (Docker overlay) network name."
+  default     = "cloud-sql-proxy"
 }
 
 variable "image_name" {
   type        = string
   description = "Cloud SQL Proxy Docker image."
-  default     = "eu.gcr.io/cloudsql-docker/gce-proxy"
+  default     = "cloud-sql-proxy"
 }
 
 variable "image_version" {
   type        = string
   description = "Cloud SQL Proxy Docker image version."
-  default     = "1.23.1"
+  default     = "2.2.0"
+}
+
+variable "listen_address" {
+  type        = string
+  description = "Cloud SQL Proxy listen address"
+  default     = "0.0.0.0"
+}
+
+variable "listen_port" {
+  type        = string
+  description = "Cloud SQL Proxy listen port"
+  default     = "5432"
 }
